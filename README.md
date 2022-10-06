@@ -1,2 +1,2 @@
 # MyVRUnityCourse
-Projects from official Unity Course about VR Game Development
+Prototype project to learn basic action in VR game development.
