@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2481727211107630451}
   - component: {fileID: 2481727211107630448}
-  - component: {fileID: 6736153028973057921}
+  - component: {fileID: -7713563461693261088}
   m_Layer: 0
   m_Name: LeftHandPresence
-  m_TagString: Untagged
+  m_TagString: Left Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,23 +49,17 @@ MonoBehaviour:
   controllerType: 320
   handModelPrefab: {fileID: 109434732395284509, guid: 65847589f926b734d9eaed6e25f0046b,
     type: 3}
---- !u!95 &6736153028973057921
-Animator:
-  serializedVersion: 4
+  holding_gun: 0
+--- !u!135 &-7713563461693261088
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2481727211107630450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 06e239018677d6c48bff57fa51b746a1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}

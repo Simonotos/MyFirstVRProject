@@ -18,6 +18,8 @@ TagManager:
   - Wood
   - Gun
   - Bullet
+  - Right Hand
+  - Left Hand
   layers:
   - Default
   - TransparentFX

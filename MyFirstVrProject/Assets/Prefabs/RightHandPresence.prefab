@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4534115315767547946}
   m_Layer: 0
   m_Name: RightHandPresence
-  m_TagString: Untagged
+  m_TagString: Right Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   controllerType: 576
   handModelPrefab: {fileID: 5686134208185362930, guid: 1fd3a7c43c8190f4d8c167ebde694364,
     type: 3}
+  holding_gun: 0
 --- !u!135 &4534115315767547946
 SphereCollider:
   m_ObjectHideFlags: 0

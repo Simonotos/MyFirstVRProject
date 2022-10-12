@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class HandsIdentity : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class HandsIdentity : MonoBehaviour
 
     private Animator handAnimator;
 
-    private bool holding_gun = false;
+    public bool holding_gun = false;
 
     // Start is called before the first frame update
     void Start()
@@ -75,15 +76,6 @@ public class HandsIdentity : MonoBehaviour
             //hand like child of this gameobject
             this.handModelSpawned = Instantiate(this.handModelPrefab, transform);
             this.handAnimator = this.handModelSpawned.GetComponent<Animator>();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag.Equals("Gun"))
-        {
-            Debug.Log(" Hai preso la pistola");
-            holding_gun = true;
         }
     }
 

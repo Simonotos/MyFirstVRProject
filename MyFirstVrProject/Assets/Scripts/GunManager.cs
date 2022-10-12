@@ -9,7 +9,8 @@ using UnityEngine.Experimental.Rendering;
 public class GunManager : MonoBehaviour
 {
     [SerializeField]
-    private XRController rightController;
+    public XRController rightController, leftController;
+
     public bool button_locked = false;
     private Animator my_anim;
 
@@ -49,15 +50,19 @@ public class GunManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        rightController.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool pressed);
+        /*rightController.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool trigger_right);
+        leftController.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool trigger_left);
 
-        if ((pressed || Input.GetKeyDown(KeyCode.Space)) && !button_locked && Time.time > next_shot)
+        if (trigger_right)
         {
-            next_shot = Time.time + delay_shooting;
-            shootBullet(ray.direction);
-            button_locked = true;
-            my_anim.SetTrigger("shoot");
-        }
+            if (button_locked && Time.time > next_shot)
+            {
+                next_shot = Time.time + delay_shooting;
+                shootBullet(ray.direction);
+                button_locked = true;
+                my_anim.SetTrigger("shoot");
+            }
+        }*/
     }
 
     private void FixedUpdate()
@@ -67,9 +72,8 @@ public class GunManager : MonoBehaviour
 
     void calculateRay()
     {
-        Vector3 distance = transform.forward * 10;
         RaycastHit hit;
-        ray = new Ray(transform.position, distance);
+        ray = new Ray(transform.position, transform.forward * 6);
 
         if(Physics.Raycast(ray, out hit, 6, rayLayer))
         {
@@ -82,7 +86,7 @@ public class GunManager : MonoBehaviour
             target.GetComponent<SpriteRenderer>().color = Color.white;
         }
 
-        //Debug.DrawRay(ray.origin, ray.direction * 6);
+        Debug.DrawRay(ray.origin, ray.direction * 6);
 
         /*For visible ray*/
         /*ray.SetPosition(0, ray_origin.transform.position);
