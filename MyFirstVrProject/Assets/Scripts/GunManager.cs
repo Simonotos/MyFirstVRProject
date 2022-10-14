@@ -1,18 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
-using XRController = UnityEngine.XR.Interaction.Toolkit.XRController;
 using UnityEngine.UI;
-using UnityEngine.Experimental.Rendering;
+using UnityEngine.InputSystem;
 
 public class GunManager : MonoBehaviour
 {
-    [SerializeField]
-    public XRController rightController, leftController;
-
-    public bool button_locked = false;
-    private Animator my_anim;
+    public InputActionProperty rightControllerTrigger;
+    public InputActionProperty leftControllerTrigger;
 
     [SerializeField]
     private Text log;
@@ -37,32 +32,40 @@ public class GunManager : MonoBehaviour
 
     private AudioSource my_audio;
 
+    private GrabHandPose gun;
+
 
     // Start is called before the first frame update
     void Start()
     {
         my_audio = GetComponent<AudioSource>();
-        my_anim = GetComponent<Animator>();
         ColorUtility.TryParseHtmlString("#FF9F00", out newCol);
+        gun = GetComponent<GrabHandPose>();
     }
 
 
     // Update is called once per frame
     void Update()
-    { 
-        /*rightController.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool trigger_right);
-        leftController.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool trigger_left);
+    {
+        float rightTrigger = rightControllerTrigger.action.ReadValue<float>();
+        float leftTrigger = leftControllerTrigger.action.ReadValue<float>();
 
-        if (trigger_right)
+        if (rightTrigger > 0.5f && gun.handHoldingGun == 1)
         {
-            if (button_locked && Time.time > next_shot)
+            if (Time.time > next_shot)
             {
                 next_shot = Time.time + delay_shooting;
                 shootBullet(ray.direction);
-                button_locked = true;
-                my_anim.SetTrigger("shoot");
             }
-        }*/
+        }
+        else if(leftTrigger > 0.5f && gun.handHoldingGun == -1)
+        {
+            if (Time.time > next_shot)
+            {
+                next_shot = Time.time + delay_shooting;
+                shootBullet(ray.direction);
+            }
+        }
     }
 
     private void FixedUpdate()

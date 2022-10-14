@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.UI;
 
 public class GrabHandPose : MonoBehaviour
 {
-    public HandData targetHandPose;
+    public HandData targetRightHandPose, targetLeftHandPose;
 
     private Vector3 startingHandPosition, finalHandPosition;
     private Quaternion startingHandRotation, finalHandRotation;
     private Quaternion[] startingFingerRotations, finalFingerRotations;
     private Vector3[] startingFingerPositions, finalFingerPositions;
+
+    public int handHoldingGun = 0; //1 right -1 left
 
     // Start is called before the first frame update
     void Start()
@@ -18,16 +19,29 @@ public class GrabHandPose : MonoBehaviour
         XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();
         grabInteractable.selectEntered.AddListener(setupPose);
         grabInteractable.selectExited.AddListener(unsetPose);
-        targetHandPose.gameObject.SetActive(false);
+
+        targetRightHandPose.gameObject.SetActive(false);
+        targetLeftHandPose.gameObject.SetActive(false);
     }
 
     public void setupPose(BaseInteractionEventArgs arg)
     {
-        if(arg.interactorObject is XRDirectInteractor)
+        if (arg.interactorObject is XRDirectInteractor)
         {
             HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
             handData.animator.enabled = false;
-            setHandDataValues(handData, targetHandPose);
+
+            if (handData.handType == HandData.HandModelType.Right)
+            {
+                setHandDataValues(handData, targetRightHandPose);
+                handHoldingGun = 1;
+            }
+            else if (handData.handType == HandData.HandModelType.Left)
+            {
+                setHandDataValues(handData, targetLeftHandPose);
+                handHoldingGun = -1;
+            }
+       
             setHandData(handData, finalHandPosition, finalHandRotation, finalFingerRotations, finalFingerPositions);
         }
     }
@@ -46,7 +60,7 @@ public class GrabHandPose : MonoBehaviour
         startingFingerPositions = new Vector3[h1.fingerBones.Length];
         finalFingerPositions = new Vector3[h2.fingerBones.Length];
 
-        for (int i=0; i < h1.fingerBones.Length; i++)
+        for (int i = 0; i < h1.fingerBones.Length; i++)
         {
             startingFingerRotations[i] = h1.fingerBones[i].localRotation;
             finalFingerRotations[i] = h2.fingerBones[i].localRotation;
@@ -56,13 +70,13 @@ public class GrabHandPose : MonoBehaviour
         }
     }
 
-    public void setHandData(HandData h, Vector3 newPosition, Quaternion newRotation, 
+    public void setHandData(HandData h, Vector3 newPosition, Quaternion newRotation,
         Quaternion[] newBonesRotation, Vector3[] newBonesPosition)
     {
         h.root.localPosition = newPosition;
         h.root.localRotation = newRotation;
 
-        for(int i=0; i < newBonesRotation.Length; i++)
+        for (int i = 0; i < newBonesRotation.Length; i++)
         {
             h.fingerBones[i].localPosition = newBonesPosition[i];
             h.fingerBones[i].localRotation = newBonesRotation[i];
@@ -75,8 +89,9 @@ public class GrabHandPose : MonoBehaviour
         {
             HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
             handData.animator.enabled = true;
+            handHoldingGun = 0;
 
-            setHandData(handData, startingHandPosition, startingHandRotation, 
+            setHandData(handData, startingHandPosition, startingHandRotation,
                 startingFingerRotations, startingFingerPositions);
         }
     }

@@ -8,6 +8,11 @@ public class TeleportManager : MonoBehaviour
     public InputActionReference teleportActivationButton;
     private bool activated = false;
 
+    private void Start()
+    {
+        teleportRay.gameObject.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
