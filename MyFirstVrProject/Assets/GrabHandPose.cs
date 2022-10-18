@@ -11,7 +11,7 @@ public class GrabHandPose : MonoBehaviour
     private Quaternion[] startingFingerRotations, finalFingerRotations;
     private Vector3[] startingFingerPositions, finalFingerPositions;
 
-    public int handHoldingGun = 0; //1 right -1 left
+    public int handHoldingObject = 0; //1 right -1 left
 
     // Start is called before the first frame update
     void Start()
@@ -34,12 +34,12 @@ public class GrabHandPose : MonoBehaviour
             if (handData.handType == HandData.HandModelType.Right)
             {
                 setHandDataValues(handData, targetRightHandPose);
-                handHoldingGun = 1;
+                handHoldingObject = 1;
             }
             else if (handData.handType == HandData.HandModelType.Left)
             {
                 setHandDataValues(handData, targetLeftHandPose);
-                handHoldingGun = -1;
+                handHoldingObject = -1;
             }
        
             setHandData(handData, finalHandPosition, finalHandRotation, finalFingerRotations, finalFingerPositions);
@@ -89,7 +89,7 @@ public class GrabHandPose : MonoBehaviour
         {
             HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
             handData.animator.enabled = true;
-            handHoldingGun = 0;
+            handHoldingObject = 0;
 
             setHandData(handData, startingHandPosition, startingHandRotation,
                 startingFingerRotations, startingFingerPositions);

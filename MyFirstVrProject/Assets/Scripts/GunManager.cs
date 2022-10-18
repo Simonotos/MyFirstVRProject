@@ -50,7 +50,7 @@ public class GunManager : MonoBehaviour
         float rightTrigger = rightControllerTrigger.action.ReadValue<float>();
         float leftTrigger = leftControllerTrigger.action.ReadValue<float>();
 
-        if (rightTrigger > 0.5f && gun.handHoldingGun == 1)
+        if (rightTrigger > 0.5f && gun.handHoldingObject == 1)
         {
             if (Time.time > next_shot)
             {
@@ -58,7 +58,7 @@ public class GunManager : MonoBehaviour
                 shootBullet(ray.direction);
             }
         }
-        else if(leftTrigger > 0.5f && gun.handHoldingGun == -1)
+        else if(leftTrigger > 0.5f && gun.handHoldingObject == -1)
         {
             if (Time.time > next_shot)
             {
