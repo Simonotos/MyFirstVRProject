@@ -20,6 +20,7 @@ TagManager:
   - Bullet
   - Right Hand
   - Left Hand
+  - Bag
   layers:
   - Default
   - TransparentFX

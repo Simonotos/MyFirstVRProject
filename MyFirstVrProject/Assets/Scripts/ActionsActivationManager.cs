@@ -8,7 +8,7 @@ public class ActionsActivationManager : MonoBehaviour
     public InputActionReference teleportActivationButtonR, teleportActivationButtonL, grabbableByDistanceActivationButtonR, grabbableByDistanceActivationButtonL;
     private bool teleportR = false, teleportL = false, grabR = false, grabL = false;
 
-    private void Start()
+    private void Awake()
     {
         teleportRayR.gameObject.SetActive(false);
         teleportRayL.gameObject.SetActive(false);
@@ -32,7 +32,9 @@ public class ActionsActivationManager : MonoBehaviour
             teleportR = !teleportR;
             grabR = false;
             teleportRayR.SetActive(teleportR);
-            grabRayR.SetActive(false);
+
+            if(grabRayR.activeInHierarchy)
+                grabRayR.SetActive(false);
         }
     }
 
@@ -43,7 +45,9 @@ public class ActionsActivationManager : MonoBehaviour
             grabR = !grabR;
             teleportR = false;
             grabRayR.SetActive(grabR);
-            teleportRayR.SetActive(false);
+
+            if (teleportRayR.activeInHierarchy)
+                teleportRayR.SetActive(false);
         }
     }
 
@@ -54,7 +58,9 @@ public class ActionsActivationManager : MonoBehaviour
             teleportL = !teleportL;
             grabL = false;
             teleportRayL.SetActive(teleportL);
-            grabRayL.SetActive(false);
+
+            if (grabRayL.activeInHierarchy)
+                grabRayL.SetActive(false);
         }
     }
 
@@ -65,7 +71,10 @@ public class ActionsActivationManager : MonoBehaviour
             grabL = !grabL;
             teleportL = false;
             grabRayL.SetActive(grabL);
-            teleportRayL.SetActive(false);
+
+            if (teleportRayL.activeInHierarchy)
+                teleportRayL.SetActive(false);
         }
     }
+
 }

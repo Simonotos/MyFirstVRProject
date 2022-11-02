@@ -66,10 +66,7 @@ public class GunManager : MonoBehaviour
                 shootBullet(ray.direction);
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
         calculateRay();
     }
 
@@ -88,8 +85,6 @@ public class GunManager : MonoBehaviour
             target.transform.position = ray.GetPoint(6);
             target.GetComponent<SpriteRenderer>().color = Color.white;
         }
-
-        Debug.DrawRay(ray.origin, ray.direction * 6);
 
         /*For visible ray*/
         /*ray.SetPosition(0, ray_origin.transform.position);
