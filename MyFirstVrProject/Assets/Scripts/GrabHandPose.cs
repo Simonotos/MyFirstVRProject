@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.UI;
 
 public class GrabHandPose : MonoBehaviour
 {
@@ -12,6 +11,9 @@ public class GrabHandPose : MonoBehaviour
     private Vector3[] startingFingerPositions, finalFingerPositions;
 
     public int handHoldingObject = 0; //1 right -1 left
+
+    [SerializeField]
+    private ActionsActivationManager actionManager;
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +37,15 @@ public class GrabHandPose : MonoBehaviour
             {
                 setHandDataValues(handData, targetRightHandPose);
                 handHoldingObject = 1;
+                actionManager.holdingObjectR = true;
+                actionManager.invokeAction();
             }
             else if (handData.handType == HandData.HandModelType.Left)
             {
                 setHandDataValues(handData, targetLeftHandPose);
                 handHoldingObject = -1;
+                actionManager.holdingObjectL = true;
+                actionManager.invokeAction();
             }
        
             setHandData(handData, finalHandPosition, finalHandRotation, finalFingerRotations, finalFingerPositions);
@@ -90,6 +96,13 @@ public class GrabHandPose : MonoBehaviour
             HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
             handData.animator.enabled = true;
             handHoldingObject = 0;
+
+            if (handData.handType == HandData.HandModelType.Right)
+            {
+                actionManager.holdingObjectR = false;
+            }
+            else
+            {actionManager.holdingObjectL = false;}
 
             setHandData(handData, startingHandPosition, startingHandRotation,
                 startingFingerRotations, startingFingerPositions);

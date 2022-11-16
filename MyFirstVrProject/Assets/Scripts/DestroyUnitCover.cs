@@ -27,7 +27,7 @@ public class DestroyUnitCover : MonoBehaviour
     {
         if (other.tag.Equals("Bullet"))
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             health--;
 
             switch (health)

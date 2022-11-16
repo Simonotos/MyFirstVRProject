@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class ActionsActivationManager : MonoBehaviour
 {
@@ -8,26 +9,46 @@ public class ActionsActivationManager : MonoBehaviour
     public InputActionReference teleportActivationButtonR, teleportActivationButtonL, grabbableByDistanceActivationButtonR, grabbableByDistanceActivationButtonL;
     private bool teleportR = false, teleportL = false, grabR = false, grabL = false;
 
-    private void Awake()
-    {
-        teleportRayR.gameObject.SetActive(false);
-        teleportRayL.gameObject.SetActive(false);
-        grabRayR.gameObject.SetActive(false);
-        grabRayL.gameObject.SetActive(false);
-    }
+    public bool holdingObjectR = false, holdingObjectL = false;
 
-    // Update is called once per frame
-    void Update()
+    public event Action onHoldingObject;
+
+    private void Awake()
     {
         teleportActivationButtonR.action.performed += onRightTeleportActivated;
         teleportActivationButtonL.action.performed += onLeftTeleportActivated;
         grabbableByDistanceActivationButtonR.action.performed += onRightDistanceGrabActivated;
         grabbableByDistanceActivationButtonL.action.performed += onLeftDistanceGrabActivated;
+        onHoldingObject += disactivateRays;
+    }
+
+    public void invokeAction()
+    {
+       onHoldingObject?.Invoke();
+    }
+
+    public void disactivateRays()
+    {
+        if (holdingObjectR)
+        {
+            teleportRayR.gameObject.SetActive(false);
+            teleportR = false;
+            grabRayR.gameObject.SetActive(false);
+            grabR = false;
+        }
+
+        if (holdingObjectL)
+        {
+            teleportRayL.gameObject.SetActive(false);
+            teleportL = false;
+            grabRayL.gameObject.SetActive(false);
+            grabL = false;
+        }
     }
 
     public void onRightTeleportActivated(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !holdingObjectR)
         {
             teleportR = !teleportR;
             grabR = false;
@@ -40,7 +61,7 @@ public class ActionsActivationManager : MonoBehaviour
 
     public void onRightDistanceGrabActivated(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !holdingObjectR)
         {
             grabR = !grabR;
             teleportR = false;
@@ -53,7 +74,7 @@ public class ActionsActivationManager : MonoBehaviour
 
     public void onLeftTeleportActivated(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !holdingObjectL)
         {
             teleportL = !teleportL;
             grabL = false;
@@ -66,7 +87,7 @@ public class ActionsActivationManager : MonoBehaviour
 
     public void onLeftDistanceGrabActivated(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !holdingObjectL)
         {
             grabL = !grabL;
             teleportL = false;

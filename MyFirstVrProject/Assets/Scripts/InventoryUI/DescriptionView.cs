@@ -24,7 +24,8 @@ public class DescriptionView : MonoBehaviour
         itemName.text = "";
     }
 
-    public void setDescription(Sprite itemImage, string itemName, string itemDescription)
+    public void setDescription(Sprite itemImage, 
+        string itemName, string itemDescription)
     {
         this.itemImage.gameObject.SetActive(true);
         this.itemImage.sprite = itemImage;

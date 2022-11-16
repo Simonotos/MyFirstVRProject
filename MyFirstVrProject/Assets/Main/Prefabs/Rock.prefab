@@ -2177,6 +2177,7 @@ GameObject:
   - component: {fileID: 3897132602048138334}
   - component: {fileID: 4239027054861546180}
   - component: {fileID: -3567245620680192484}
+  - component: {fileID: 5787352937331653538}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -2192,7 +2193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4239027054861546181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.2243, y: 0.113, z: -9.709}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2246,6 +2247,7 @@ MonoBehaviour:
   targetRightHandPose: {fileID: 3897132602983027819}
   targetLeftHandPose: {fileID: 3897132602159124257}
   handHoldingObject: 0
+  actionManager: {fileID: 0}
 --- !u!114 &4239027054861546180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2287,10 +2289,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5787352937331653538}
+        m_TargetAssemblyTypeName: ThrowObject, Assembly-CSharp
+        m_MethodName: onGrab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5787352937331653538}
+        m_TargetAssemblyTypeName: ThrowObject, Assembly-CSharp
+        m_MethodName: endGrab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -2358,7 +2384,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 2
   m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
+  m_ForceGravityOnDetach: 1
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
   rightAttachTransform: {fileID: 3897132601808750876}
@@ -2377,5 +2403,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 81be2ff214084bb42b30073877a6ffe8,
     type: 2}
-  quantity: 5
+  quantity: 1
   playerInventory: {fileID: 11400000, guid: 2ef0f6578e4909648bb331902bcce954, type: 2}
+--- !u!114 &5787352937331653538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4239027054861546181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74dfdf8b53250274faeddd9573e8ba33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrownessForce: 0
+  log: {fileID: 0}

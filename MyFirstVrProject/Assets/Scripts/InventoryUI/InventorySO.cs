@@ -7,6 +7,7 @@ public class InventorySO : ScriptableObject
 {
     [SerializeField]
     private List<InventoryItem> inventoryItems;
+
     public int size;
 
     public void addItem(ItemSO itemSO, int quantity)
@@ -15,7 +16,12 @@ public class InventorySO : ScriptableObject
 
         for (int i = 0; i < inventoryItems.Count; i++)
         {
-            if (inventoryItems[i].itemSO.ID == itemSO.ID) //same object
+            if (inventoryItems[i].isEmpty())
+            {
+                inventoryItems[i] = inventoryItems[i].changeQuantity(itemSO, quantity);
+                return;
+            }
+            else if (inventoryItems[i].itemSO.ID == itemSO.ID) //same object
             {
                 //check if stackable
                 if (itemSO.isStackable)
@@ -35,8 +41,33 @@ public class InventorySO : ScriptableObject
 
         if (!finded)
             inventoryItems.Add(new InventoryItem { itemSO = itemSO, quantity = quantity, });
+    }
 
-        updateSize();
+    public bool removeItem(ItemSO item)
+    {
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (!inventoryItems[i].isEmpty() && inventoryItems[i].itemSO.ID == item.ID)
+            {
+                ItemSO itemSO = inventoryItems[i].itemSO;
+
+                if (itemSO.isStackable)
+                {
+                    int amount = inventoryItems[i].quantity - itemSO.usageCount;
+
+                    if (amount > 0)
+                    {
+                        inventoryItems[i] = inventoryItems[i].changeQuantity(itemSO, amount);
+                        return true;
+                    }
+                }
+
+                inventoryItems[i] = inventoryItems[i].setToEmpty();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public Dictionary<int, InventoryItem> getCurrentInventoryState()
@@ -45,17 +76,12 @@ public class InventorySO : ScriptableObject
 
         for (int i = 0; i < inventoryItems.Count; i++)
         {
-            if (!inventoryItems[i].isEmpty())
-                returnedValue[i] = inventoryItems[i];
+            returnedValue[i] = inventoryItems[i];
         }
 
         return returnedValue;
     }
 
-    public void updateSize()
-    {
-        size = inventoryItems.Count;
-    }
     public void printArray()
     {
         string output = "";
@@ -67,7 +93,7 @@ public class InventorySO : ScriptableObject
 
         Debug.Log(output);
     }
-
+    
     public InventoryItem getItemAt(int index)
     {
         return inventoryItems[index];
@@ -85,9 +111,14 @@ public struct InventoryItem //struct safer instead of class
         return new InventoryItem{itemSO = sameItemSO, quantity = newQuantity};
     }
 
+    public InventoryItem setToEmpty()
+    {
+        return new InventoryItem { itemSO = null, quantity = 0 };
+    }
+
     public bool isEmpty()
     {
-        if (!itemSO)
+        if (itemSO == null)
             return true;
         
         return false;

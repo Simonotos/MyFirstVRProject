@@ -9,23 +9,11 @@ public class Item : MonoBehaviour
     private int quantity;
     [SerializeField]
     private InventorySO playerInventory;
-    private GrabHandPose grabHand;
-
-    void Awake()
-    {
-        grabHand = GetComponent<GrabHandPose>();
-    }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Bag"))
-        {
-            /*if (grabHand)
-            {
-                if(grabHand.handHoldingObject == 0)*/
-
             addItemToBag();
-        }
     }
 
     public void addItemToBag()

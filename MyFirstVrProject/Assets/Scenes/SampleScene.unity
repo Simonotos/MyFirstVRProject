@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7799341, g: 0.77994657, b: 0.7799192, a: 1}
+  m_IndirectSpecularColor: {r: 0.59937525, g: 0.5997512, b: 0.59948856, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1468,7 +1468,7 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323214344}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.0000019073486, y: 8.576629, z: 0.0000019073486}
+  m_LocalReferencePoint: {x: 0.0000019073486, y: 8.525785, z: 0.0000019073486}
   m_Size: 49.999996
   m_FadeMode: 0
   m_AnimateCrossFading: 0
@@ -1795,7 +1795,7 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357196162}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.0000019073486, y: 6.593447, z: 0.0000038146973}
+  m_LocalReferencePoint: {x: 0.0000019073486, y: 6.5876226, z: 0.0000038146973}
   m_Size: 50
   m_FadeMode: 0
   m_AnimateCrossFading: 0
@@ -1930,16 +1930,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupId: 0
-  mode: 7
+  mode: 1
   customPainterIndex: 0
   customPainterArgs: 
   enableTerrainMask: 1
   forceUpdateGeometry: 0
-  brushRadius: 4
+  brushRadius: 12.09
   brushRadiusJitter: 0
   brushRotation: 0
   brushRotationJitter: 0
-  brushOpacity: 0.541
+  brushOpacity: 0.297
   brushOpacityJitter: 0
   brushTargetStrength: 1
   brushScatter: 0
@@ -1958,7 +1958,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 36ca50646fcd9bb438393fe69f4fce4d, type: 3}
   - {fileID: 2800000, guid: c04dea6ddca855243b98689304bd531d, type: 3}
   - {fileID: 2800000, guid: a980d13c990ec08429a09a1d0c1edb47, type: 3}
-  selectedBrushMaskIndex: 9
+  selectedBrushMaskIndex: 0
   selectedSplatIndices: 00000000
   samplePoint: {x: 0, y: 0, z: 0}
   conditionalPaintingConfigs:
@@ -3243,84 +3243,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   alignToSurface: 0
---- !u!21 &788472457
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: SingleLine-LightSaber(Clone)
-  m_Shader: {fileID: 4800000, guid: 2d9a4ca4b2730b64e8aade7030f8caeb, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _Glossiness: 0.5
-    - _LightSaberFactor: 0.8
-    - _LineScale: 0.01
-    - _LineWidth: 20
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _UvBasedLightSaberFactor: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &814358244
 GameObject:
   m_ObjectHideFlags: 0
@@ -6634,7 +6556,7 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571625452}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.0000038146973, y: 3.2081058, z: 0.0000019073486}
+  m_LocalReferencePoint: {x: 0.0000038146973, y: 3.1838603, z: 0.0000019073486}
   m_Size: 50.000004
   m_FadeMode: 0
   m_AnimateCrossFading: 0
@@ -6724,6 +6646,84 @@ Transform:
   m_Father: {fileID: 92139952}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1575061641
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SingleLine-LightSaber(Clone)
+  m_Shader: {fileID: 4800000, guid: 2d9a4ca4b2730b64e8aade7030f8caeb, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Glossiness: 0.5
+    - _LightSaberFactor: 0.8
+    - _LineScale: 0.01
+    - _LineWidth: 20
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _UvBasedLightSaberFactor: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1605497507
 GameObject:
   m_ObjectHideFlags: 0
@@ -6986,9 +6986,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0f4903934415f49840bba656b288b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightController: {fileID: 1534642701}
-  teleportActivationButton: 2
-  log: {fileID: 0}
+  teleportRayR: {fileID: 0}
+  teleportRayL: {fileID: 0}
+  grabRayR: {fileID: 0}
+  grabRayL: {fileID: 0}
+  teleportActivationButtonR: {fileID: 0}
+  teleportActivationButtonL: {fileID: 0}
+  grabbableByDistanceActivationButtonR: {fileID: 0}
+  grabbableByDistanceActivationButtonL: {fileID: 0}
+  holdingObjectR: 0
+  holdingObjectL: 0
 --- !u!114 &1725982599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7898,7 +7905,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 788472457}
+  - {fileID: 1575061641}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

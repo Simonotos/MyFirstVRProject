@@ -10,7 +10,7 @@ public class BagInteract : MonoBehaviour
 
     public bool enteredBagR = false, enteredBagL = false;
 
-    private void Update()
+    private void Awake()
     {
         triggerPressedR.action.canceled += onTriggerReleasedR;
         triggerPressedL.action.canceled += onTriggerReleasedL;

@@ -19,5 +19,8 @@ public class ItemSO : ScriptableObject
     public bool isStackable { get; set; }
     [field: SerializeField]
     public int maxStackable { get; set; }
+    
+    [field: SerializeField]
+    public int usageCount { get; set; }
 
 }

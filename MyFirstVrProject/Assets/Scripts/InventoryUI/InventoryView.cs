@@ -18,14 +18,12 @@ public class InventoryView : MonoBehaviour
 
     private List<ItemView> listOfUIItems = new List<ItemView>();
 
-    private bool opened = false;
+    public bool opened = false;
 
     public Action<int> onDescriptionRequested;
 
-    private void Awake()
-    {
-        descriptionView.resetDescription();
-    }
+    public int offset_x, offset_y;
+    public int elementsInRow;
 
     public void openCloseWindow()
     {
@@ -33,19 +31,42 @@ public class InventoryView : MonoBehaviour
         myCanvas.SetActive(opened);
     }
 
-    public void updateUIData(int itemIndex, Sprite itemImage, int itemQuantity, string itemName)
+    public void initializeInventoryUIPool(int size)
     {
-        if (listOfUIItems.Count > itemIndex)
-            listOfUIItems[itemIndex].setData(itemImage, itemQuantity, itemName);
-        else
+        int pos_x = offset_x;
+        int pos_y = 15;
+
+        for (int i = 0; i < size; i++)
         {
+            if (i > 0)
+            {
+                if (i % 3 == 0) //ho finito la riga
+                {
+                    pos_x = offset_x;
+                    pos_y += offset_y;
+                }
+                else{pos_x += offset_x * 2;}
+            }
+
             ItemView item = Instantiate(itemUIPrefab, Vector3.zero, Quaternion.identity);
             item.transform.SetParent(contentPanel, false);
-            item.setData(itemImage, itemQuantity, itemName);
+            item.setEmptyData();
+            item.transform.localPosition = new Vector3(pos_x , -(pos_y), 0);
+            item.setCoordinates(pos_x, pos_y);
             listOfUIItems.Add(item);
             //event handler
             item.OnItemClicked += OnItemClicked;
-        } 
+        }
+    }
+
+    public void updateItemUI(int itemIndex, Sprite itemImage, int itemQuantity, string itemName)
+    {
+         listOfUIItems[itemIndex].setData(itemImage, itemQuantity, itemName);
+    }
+
+    public void updateItemToEmpty(int itemIndex)
+    {
+        listOfUIItems[itemIndex].setEmptyData();
     }
 
     private void OnItemClicked(ItemView obj)
