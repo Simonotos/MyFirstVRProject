@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +11,11 @@ public class DescriptionView : MonoBehaviour
     [SerializeField]
     private Text itemDescription;
 
+    [SerializeField]
+    private GameObject panel;
+
+    public Action onUsageButtonClicked;
+
     private void Awake()
     {
         resetDescription();
@@ -19,17 +23,20 @@ public class DescriptionView : MonoBehaviour
 
     public void resetDescription()
     {
-        itemImage.gameObject.SetActive(false);
-        itemDescription.text = "";
-        itemName.text = "";
+        panel.SetActive(false);
     }
 
     public void setDescription(Sprite itemImage, 
         string itemName, string itemDescription)
     {
-        this.itemImage.gameObject.SetActive(true);
         this.itemImage.sprite = itemImage;
         this.itemName.text = itemName;
         this.itemDescription.text = itemDescription;
+        panel.SetActive(true);
+    }
+
+    public void onButtonClicked()
+    {
+        onUsageButtonClicked.Invoke();
     }
 }

@@ -23,4 +23,7 @@ public class ItemSO : ScriptableObject
     [field: SerializeField]
     public int usageCount { get; set; }
 
+    [field: SerializeField]
+    public GameObject prefab { get; set; }
+
 }

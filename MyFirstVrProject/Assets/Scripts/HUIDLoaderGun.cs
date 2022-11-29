@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -77,7 +76,7 @@ public class HUIDLoaderGun : MonoBehaviour
     public void onReloadEvent(InputAction.CallbackContext context)
     {
         if (grabHand.handHoldingObject != 0 && gunNoAmmo) { 
-            if (context.performed && inventoryController.removeItem(bulletSO))
+            if (context.performed && inventoryController.removeItem(bulletSO) != -1)
             {
                 loader_txt.text = "";
                 gunAudioSource.clip = gunReloading;

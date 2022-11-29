@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
@@ -12,14 +12,20 @@ public class InventoryController : MonoBehaviour
 
     [SerializeField]
     private GameObject viewport;
+    private ItemSO itemSOWatchingDescription;
+
     [SerializeField]
-    private Scrollbar scrollbar;
+    private GameObject playerHead;
+
+    [SerializeField]
+    private List<ObjectPooling> poolList;
 
     private void Start()
     {
         inventoryView.initializeInventoryUIPool(inventorySO.size);
         initializeInventoryView();
-        inventoryView.onDescriptionRequested += handleItemClicked; 
+        inventoryView.onDescriptionRequested += handleItemClicked;
+        descriptionView.onUsageButtonClicked += handleUsageButtonClicked;
     }
 
     private void Update()
@@ -47,6 +53,26 @@ public class InventoryController : MonoBehaviour
         ItemSO itemSO = item.itemSO;
         inventoryView.updateDescription(itemIndex, itemSO.Image,
             itemSO.Name, itemSO.Description);
+
+        itemSOWatchingDescription = itemSO;
+    }
+
+    private void handleUsageButtonClicked()
+    {
+        if (itemSOWatchingDescription != null)
+        {
+            foreach (var poolScript in poolList)
+            {
+                if (poolScript.itemSO.ID == itemSOWatchingDescription.ID)
+                {
+                    GameObject obj = poolScript.getPooledObject();
+                    obj.transform.position = new Vector3(playerHead.transform.position.x, playerHead.transform.position.y, playerHead.transform.position.z + 0.3f);
+                    obj.SetActive(true);
+                    removeItem(itemSOWatchingDescription);
+                    return;
+                }
+            }
+        }
     }
 
     public void openCloseInventoryUI()
@@ -54,9 +80,17 @@ public class InventoryController : MonoBehaviour
         inventoryView.openCloseWindow();
     }
 
-    public bool removeItem(ItemSO itemUsed)
+    public int removeItem(ItemSO itemUsed)
     {
-        return inventorySO.removeItem(itemUsed);
+        int value_returned = inventorySO.removeItem(itemUsed);
+
+        if (value_returned == 0)
+        {
+            descriptionView.resetDescription();
+            itemSOWatchingDescription = null;
+        }
+
+        return value_returned;
     }
 
     public void initializeInventoryView() {

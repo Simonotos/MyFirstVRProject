@@ -43,7 +43,7 @@ public class InventorySO : ScriptableObject
             inventoryItems.Add(new InventoryItem { itemSO = itemSO, quantity = quantity, });
     }
 
-    public bool removeItem(ItemSO item)
+    public int removeItem(ItemSO item)
     {
         for (int i = 0; i < inventoryItems.Count; i++)
         {
@@ -58,16 +58,16 @@ public class InventorySO : ScriptableObject
                     if (amount > 0)
                     {
                         inventoryItems[i] = inventoryItems[i].changeQuantity(itemSO, amount);
-                        return true;
+                        return 1;
                     }
                 }
 
                 inventoryItems[i] = inventoryItems[i].setToEmpty();
-                return true;
+                return 0;
             }
         }
 
-        return false;
+        return -1;
     }
 
     public Dictionary<int, InventoryItem> getCurrentInventoryState()

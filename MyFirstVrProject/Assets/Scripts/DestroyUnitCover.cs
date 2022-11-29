@@ -12,22 +12,16 @@ public class DestroyUnitCover : MonoBehaviour
     private MeshRenderer mesh;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         mesh = GetComponent<MeshRenderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Bullet"))
         {
-            other.gameObject.SetActive(false);
+            other.gameObject.GetComponent<BoxCollider>().enabled = false;
             health--;
 
             switch (health)

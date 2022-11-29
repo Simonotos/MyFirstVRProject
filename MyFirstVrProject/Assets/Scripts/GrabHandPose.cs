@@ -12,8 +12,7 @@ public class GrabHandPose : MonoBehaviour
 
     public int handHoldingObject = 0; //1 right -1 left
 
-    [SerializeField]
-    private ActionsActivationManager actionManager;
+    public ActionsActivationManager actionManager;
 
     // Start is called before the first frame update
     void Start()

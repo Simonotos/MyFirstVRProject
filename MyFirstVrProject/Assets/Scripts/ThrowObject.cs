@@ -1,32 +1,46 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ThrowObject : MonoBehaviour
 {
     [SerializeField]
-    private float thrownessForce;
+    private float throwForce;
     List<Vector3> objectPositions;
-
-    [SerializeField]
-    private Text log;
+    private bool isHeld;
 
     private void Awake()
     {
         objectPositions = new List<Vector3>();
+        isHeld = false;
+    }
+
+    private void Update()
+    {
+        if (isHeld)
+        {
+            if (objectPositions.Count > 15)
+                objectPositions.RemoveAt(0);
+
+            objectPositions.Add(transform.position);
+        }
     }
 
     public void onGrab()
     {
         objectPositions.Clear();
-        log.text = "Ho grabbato l'oggetto";
+        isHeld = true;
     }
 
     public void endGrab()
     {
-        log.text = "Ho rilasciato l'oggetto";
+        isHeld = false;
+        throwObject();
+    }
+
+    public void throwObject() 
+    {
+        Vector3 direction = objectPositions[objectPositions.Count - 1] - objectPositions[0];
+        GetComponent<Rigidbody>().AddForce(direction * throwForce, ForceMode.Impulse);
     }
 
 
