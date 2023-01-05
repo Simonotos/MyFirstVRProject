@@ -5,17 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
-  - Metal
-  - Blood
-  - Dirt
-  - Concrete
-  - ExplosiveBarrel
-  - Target
-  - GasTank
-  - Metal (Static)
-  - Wood (Static)
-  - Dirt (Static)
-  - Wood
   - Gun
   - Bullet
   - Right Hand
@@ -25,20 +14,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Enemy
   - Wall
-  - First Person View
-  - Character
-  - Post Processing
-  - Post Processing Weapon
-  - Post Processing Scope
-  - Invisible Wall
-  - Projectile
   - Bullet
+  - Gun
   - 
   - 
   - 
@@ -52,8 +34,15 @@ TagManager:
   - 
   - 
   - 
-  - POLARIS RAYCAST
-  - POLARIS SPLINE
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

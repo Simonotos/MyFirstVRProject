@@ -14,6 +14,9 @@ public class GunManager : MonoBehaviour
     private Ray ray;
 
     [SerializeField]
+    private float maxTargettableDistance;
+
+    [SerializeField]
     private GameObject target;
     [SerializeField]
     private SpriteRenderer targetSprite;
@@ -100,7 +103,7 @@ public class GunManager : MonoBehaviour
         RaycastHit hit;
         ray = new Ray(bullet_origin.transform.position, bullet_origin.transform.right);
 
-        if (Physics.Raycast(ray, out hit, 6, rayLayer))
+        if (Physics.Raycast(ray, out hit, maxTargettableDistance, rayLayer))
         {
             outOfRange = false;
             targetSprite.color = newCol;
@@ -110,7 +113,7 @@ public class GunManager : MonoBehaviour
         {
             outOfRange = true;
             targetSprite.color = Color.white;
-            target.transform.position = ray.GetPoint(6);
+            target.transform.position = ray.GetPoint(maxTargettableDistance);
         }
 
         /*For visible ray*/
