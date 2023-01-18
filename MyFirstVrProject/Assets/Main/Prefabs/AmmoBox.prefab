@@ -443,8 +443,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSO: {fileID: 11400000, guid: ac67f54afe7c01340bd8984e3adc73de, type: 2}
   descriptionText: {fileID: 1791685328086944316}
+  logText: {fileID: 0}
   canvasObj: {fileID: 5134665442150429686}
-  player: {fileID: 0}
+  playerHead: {fileID: 0}
 --- !u!1 &1317395102796445363
 GameObject:
   m_ObjectHideFlags: 0

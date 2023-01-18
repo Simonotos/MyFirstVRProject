@@ -10,6 +10,10 @@ TagManager:
   - Right Hand
   - Left Hand
   - Bag
+  - ClimbWall
+  - Knob
+  - ClimbWallZone
+  - RecoverKnob
   layers:
   - Default
   - TransparentFX
@@ -21,9 +25,9 @@ TagManager:
   - Wall
   - Bullet
   - Gun
-  - 
-  - 
-  - 
+  - Knob
+  - ClimbWall
+  - Terrain
   - 
   - 
   - 
