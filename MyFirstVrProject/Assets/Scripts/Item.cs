@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
     public void addItemToBag()
     {
         playerInventory.addItem(itemScriptableObject, quantity);
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
 }

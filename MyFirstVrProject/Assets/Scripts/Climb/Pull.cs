@@ -76,11 +76,9 @@ public class Pull : MonoBehaviour
             else
                 handFreezed = false;
 
-            if ((isRightHand && !handFreezed) || (isLeftHand && !handFreezed))
+            if (!handFreezed)
             { 
                 Vector3 newPos = playerBody.transform.position + (prevPos - transform.localPosition);
-                /*log.text += "\n OldPosition: " + playerBody.transform.position;
-                log.text += "\n NewPosition: " + newPos;*/
                 playerBody.transform.position = newPos;
             }
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlayerRigidbodyClimbing : MonoBehaviour
 {
@@ -14,15 +13,6 @@ public class PlayerRigidbodyClimbing : MonoBehaviour
     [SerializeField]
     private LayerMask terrainLayers;
     private bool startedClimbing;
-
-    [SerializeField]
-    private MeshRenderer gunSocket, bag;
-    [SerializeField]
-    private GameObject gun;
-    [SerializeField]
-    private Canvas gunHUID;
-    [SerializeField]
-    private SpriteRenderer gunTargetSprite;
 
     [SerializeField]
     private AudioClip breathingClip, breathingFasterClip;
@@ -44,13 +34,11 @@ public class PlayerRigidbodyClimbing : MonoBehaviour
         if (rightHandPulling.onGrabbing || leftHandPulling.onGrabbing)
         {
             startedClimbing = true;
-            HideShowObjects(false);
             handleRigidody(false);
         }
         else
         {
             startedClimbing = false;
-            HideShowObjects(true);
             handleRigidody(true);
         }
     }
@@ -71,14 +59,6 @@ public class PlayerRigidbodyClimbing : MonoBehaviour
         Gizmos.DrawSphere(transform.position, sphereRadius);
     }*/
 
-    private void HideShowObjects(bool value)
-    {
-        gun.SetActive(value);
-        gunTargetSprite.enabled = value;
-        gunHUID.enabled = value;
-        gunSocket.enabled = value;
-        bag.enabled = value;
-    }
     private void handleRigidody(bool activate)
     {
         myRigidbody.useGravity = activate;

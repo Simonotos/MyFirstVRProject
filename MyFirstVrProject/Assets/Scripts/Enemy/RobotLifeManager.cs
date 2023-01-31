@@ -36,7 +36,7 @@ public class RobotLifeManager : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            other.gameObject.GetComponent<BoxCollider>().enabled = false;
+            other.gameObject.SetActive(false);
 
             if (!robotAttack.inAttackRange)
                 robotBehavour.inRange(true);

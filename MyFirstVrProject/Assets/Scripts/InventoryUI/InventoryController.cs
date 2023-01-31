@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class InventoryController : MonoBehaviour
 
     [SerializeField]
     private List<ObjectPooling> poolList;
+
+    [SerializeField]
+    private Text log;
 
     private void Start()
     {
@@ -61,12 +65,13 @@ public class InventoryController : MonoBehaviour
     {
         if (itemSOWatchingDescription != null)
         {
+
             foreach (var poolScript in poolList)
             {
-                if (poolScript.itemSO.ID == itemSOWatchingDescription.ID)
+                if (poolScript.itemSO.ID  == itemSOWatchingDescription.ID)
                 {
                     GameObject obj = poolScript.getPooledObject();
-                    obj.transform.position = new Vector3(playerHead.transform.position.x, playerHead.transform.position.y, playerHead.transform.position.z + 0.3f);
+                    obj.transform.position = transform.TransformPoint(new Vector3(playerHead.transform.localPosition.x, playerHead.transform.localPosition.y, playerHead.transform.localPosition.z + 0.35f));
                     obj.SetActive(true);
                     removeItem(itemSOWatchingDescription);
                     return;

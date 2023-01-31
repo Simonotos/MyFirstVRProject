@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2742425462320415264}
   - component: {fileID: 4517938118389318093}
   - component: {fileID: 7336724755799454729}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InventoryItemUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 8892389314564097146}
   - component: {fileID: 4916706563228846528}
   - component: {fileID: 9016903893639762139}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ItemImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 7233114897989702884}
   - component: {fileID: 8604128795171434413}
   - component: {fileID: 1735709928388606249}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ItemName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 9034669483889850766}
   - component: {fileID: 1399326368241182051}
   - component: {fileID: 1047785376710881257}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ItemQuantity
   m_TagString: Untagged
   m_Icon: {fileID: 0}

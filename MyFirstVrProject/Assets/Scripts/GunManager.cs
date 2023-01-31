@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class GunManager : MonoBehaviour
 {
     public InputActionProperty rightControllerTrigger;
+    public InputActionProperty rightControllerTriggerHold;
     public InputActionProperty leftControllerTrigger;
 
     [SerializeField]
@@ -18,7 +19,6 @@ public class GunManager : MonoBehaviour
 
     [SerializeField]
     private GameObject target;
-    [SerializeField]
     private SpriteRenderer targetSprite;
 
     [SerializeField]
@@ -26,17 +26,14 @@ public class GunManager : MonoBehaviour
 
     [SerializeField]
     private float bullet_velocity;
-    private float delay_shooting = 0.5f;
-    private float next_shot = 0f;
 
     [SerializeField]
     private LayerMask rayLayer;
     private Color newCol;
 
-    [SerializeField]
     private AudioSource myAudioSource;
     [SerializeField]
-    private AudioClip gunNoAmmoClip;
+    private AudioClip chargeShotClip, releasedShotClip;
 
     [SerializeField]
     private GrabHandPose grabHand;
@@ -47,21 +44,26 @@ public class GunManager : MonoBehaviour
     private bool can_shoot = false;
 
     [SerializeField]
-    private Animator myAnimator;
-
-    [SerializeField]
     private ObjectPooling bulletPool;
 
     [SerializeField]
     private LineRenderer rayDraw;
     private bool outOfRange;
 
+    private GameObject currentBullet;
+    private bool isHoldingTrigger;
+    private bool isShooting;
+
 
     // Start is called before the first frame update
     void Awake()
     {
+        targetSprite = target.GetComponent<SpriteRenderer>();
+        myAudioSource = GetComponent<AudioSource>();
         ColorUtility.TryParseHtmlString("#FF9F00", out newCol);
         outOfRange = true;
+        rightControllerTriggerHold.action.performed += holdingTrigger;
+        rightControllerTriggerHold.action.canceled += releasedHoldingTrigger;
     }
 
     // Update is called once per frame
@@ -71,37 +73,37 @@ public class GunManager : MonoBehaviour
         float leftTrigger = leftControllerTrigger.action.ReadValue<float>();
 
         if (Input.GetKeyDown(KeyCode.Space))
-            shootBullet(ray.direction, outOfRange);
+            spawnBullet();
 
         if (grabHand.handHoldingObject != 0)
         {
             calculateRay();
 
-            if (Time.time > next_shot)
+            if (isHoldingTrigger == false && !isShooting)
             {
                 can_shoot = true;
-                loaderGun.bulletReloadedUI();
+                //loaderGun.bulletReloadedUI();
             }
             else { can_shoot = false; }
 
             //Input
             if (rightTrigger > 0.5f && grabHand.handHoldingObject == 1 && can_shoot)
             {
-                next_shot = Time.time + delay_shooting;
-                shootBullet(ray.direction, outOfRange);
+                isShooting = true;
+                spawnBullet();
             }
             else if (leftTrigger > 0.5f && grabHand.handHoldingObject == -1 && can_shoot)
             {
-                next_shot = Time.time + delay_shooting;
-                shootBullet(ray.direction, outOfRange);
+                isShooting = true;
+                spawnBullet();
             }
         }
     }
-
+ 
     void calculateRay()
     {
         RaycastHit hit;
-        ray = new Ray(bullet_origin.transform.position, bullet_origin.transform.right);
+        ray = new Ray(bullet_origin.transform.position, bullet_origin.transform.forward);
 
         if (Physics.Raycast(ray, out hit, maxTargettableDistance, rayLayer))
         {
@@ -121,39 +123,56 @@ public class GunManager : MonoBehaviour
         rayDraw.SetPosition(1, bullet_origin.transform.right * 10 + bullet_origin.transform.position);*/
     }
 
-    void shootBullet(Vector3 direction, bool range)
+    void spawnBullet()
     {
-        if (!loaderGun.gunNoAmmo)
+        /*if (!loaderGun.gunNoAmmo)
         {
-            myAudioSource.Play();
-            myAnimator.SetTrigger("shoot");
-            loaderGun.justShootUI();
+            //loaderGun.justShootUI();*/
+            //myAudioSource.Play();
 
-            GameObject bullet = bulletPool.getPooledObject();
+        currentBullet = bulletPool.getPooledObject();
 
-            if (bullet != null)
-            {
-                bullet.GetComponent<BoxCollider>().enabled = !range;
-                bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                bullet.transform.position = bullet_origin.transform.position;
-                bullet.transform.rotation = bullet_origin.transform.rotation;
-                bullet.SetActive(true);
-                bullet.GetComponent<Rigidbody>().AddForce(direction * bullet_velocity, ForceMode.Impulse);
-                StartCoroutine(despawnBullet(bullet));
-            }
-        }
-        else
+        if (currentBullet != null)
         {
-            myAudioSource.clip = gunNoAmmoClip;
+            currentBullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            currentBullet.transform.position = bullet_origin.transform.position;
+            currentBullet.transform.SetParent(transform, true);
+            currentBullet.SetActive(true);
+            myAudioSource.clip = chargeShotClip;
             myAudioSource.Play();
         }
     }
 
-    IEnumerator despawnBullet(GameObject bullet)
+    private void releaseBullet()
     {
-        yield return new WaitForSeconds(3);
+        currentBullet.GetComponent<BoxCollider>().enabled = !outOfRange;
+        currentBullet.transform.SetParent(null, true);
+        myAudioSource.clip = releasedShotClip;
+        myAudioSource.Play();
+        currentBullet.GetComponent<Rigidbody>().AddForce(ray.direction * bullet_velocity, ForceMode.Impulse);
+        isShooting = false;
+    }
 
-        if (bullet)
-            bullet.GetComponent<BoxCollider>().enabled = false;
+    private void holdingTrigger(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            isHoldingTrigger = true;
+    }
+
+    private void releasedHoldingTrigger(InputAction.CallbackContext context)
+    {
+        if (context.canceled && isHoldingTrigger)
+        {
+            releaseBullet();
+        }
+        else
+        {
+            currentBullet.SetActive(false);
+            can_shoot = true;
+            isShooting = false;
+            myAudioSource.Stop();
+        }
+
+        isHoldingTrigger = false;
     }
 }

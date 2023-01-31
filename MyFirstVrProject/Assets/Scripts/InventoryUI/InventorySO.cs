@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu]
 public class InventorySO : ScriptableObject
 {
     [SerializeField]
     private List<InventoryItem> inventoryItems;
-
     public int size;
 
     public void addItem(ItemSO itemSO, int quantity)

@@ -894,6 +894,15 @@
                     "processors": "",
                     "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "HoldTrigger",
+                    "type": "Button",
+                    "id": "e54b3a60-63d0-419c-b0d0-ae8bbc42d281",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=1.25)",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -1092,6 +1101,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "B",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb19a0c7-a14d-476c-9c6c-4aa760eec447",
+                    "path": "<OculusTouchController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
