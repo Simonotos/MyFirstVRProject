@@ -6,7 +6,7 @@ public class ObjectDescriptionWindow : MonoBehaviour
     [SerializeField]
     private ItemSO itemSO;
     [SerializeField]
-    private Text descriptionText, logText;
+    private Text descriptionText;
     [SerializeField]
     private GameObject canvasObj;
     public GameObject playerHead;
@@ -26,9 +26,6 @@ public class ObjectDescriptionWindow : MonoBehaviour
         {
             Vector3 distanceVector = transform.position - playerHead.transform.position;
             float distance = Vector3.SqrMagnitude(distanceVector);
-            
-            if(logText)
-                logText.text = "Distanza Oggetto da Player: " + distance;
 
             if (distance <= 0.2f)
             {

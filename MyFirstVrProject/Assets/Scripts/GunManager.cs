@@ -77,6 +77,7 @@ public class GunManager : MonoBehaviour
 
         if (grabHand.handHoldingObject != 0)
         {
+            targetSprite.enabled = true;
             calculateRay();
 
             if (isHoldingTrigger == false && !isShooting)

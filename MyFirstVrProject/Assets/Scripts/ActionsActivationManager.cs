@@ -15,10 +15,10 @@ public class ActionsActivationManager : MonoBehaviour
 
     private void Awake()
     {
-        teleportActivationButtonR.action.performed += onRightTeleportActivated;
-        teleportActivationButtonL.action.performed += onLeftTeleportActivated;
-        grabbableByDistanceActivationButtonR.action.performed += onRightDistanceGrabActivated;
-        grabbableByDistanceActivationButtonL.action.performed += onLeftDistanceGrabActivated;
+        teleportActivationButtonR.action.started += onRightTeleportActivated;
+        teleportActivationButtonL.action.started += onLeftTeleportActivated;
+        grabbableByDistanceActivationButtonR.action.started += onRightDistanceGrabActivated;
+        grabbableByDistanceActivationButtonL.action.started += onLeftDistanceGrabActivated;
         onHoldingObject += disactivateRays;
     }
 
@@ -48,7 +48,7 @@ public class ActionsActivationManager : MonoBehaviour
 
     public void onRightTeleportActivated(InputAction.CallbackContext context)
     {
-        if (context.performed && !holdingObjectR)
+        if (context.started && !holdingObjectR)
         {
             teleportR = !teleportR;
             grabR = false;
@@ -61,7 +61,7 @@ public class ActionsActivationManager : MonoBehaviour
 
     public void onRightDistanceGrabActivated(InputAction.CallbackContext context)
     {
-        if (context.performed && !holdingObjectR)
+        if (context.started && !holdingObjectR)
         {
             grabR = !grabR;
             teleportR = false;
@@ -74,7 +74,7 @@ public class ActionsActivationManager : MonoBehaviour
 
     public void onLeftTeleportActivated(InputAction.CallbackContext context)
     {
-        if (context.performed && !holdingObjectL)
+        if (context.started && !holdingObjectL)
         {
             teleportL = !teleportL;
             grabL = false;
@@ -87,7 +87,7 @@ public class ActionsActivationManager : MonoBehaviour
 
     public void onLeftDistanceGrabActivated(InputAction.CallbackContext context)
     {
-        if (context.performed && !holdingObjectL)
+        if (context.started && !holdingObjectL)
         {
             grabL = !grabL;
             teleportL = false;

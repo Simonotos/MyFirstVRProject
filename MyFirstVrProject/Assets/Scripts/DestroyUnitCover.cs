@@ -19,23 +19,33 @@ public class DestroyUnitCover : MonoBehaviour
     {
         if (other.tag.Equals("Bullet"))
         {
-            other.gameObject.GetComponent<BoxCollider>().enabled = false;
-            health--;
+            other.gameObject.SetActive(false);
+            reduceLife();
+        }
+    }
 
-            switch (health)
-            {
-                case 2:
-                    mesh.material = medium;
-                    break;
+    public void onCollisionDetect()
+    {
+        reduceLife();
+    }
 
-                case 1:
-                    mesh.material = low;
-                    break;
+    private void reduceLife()
+    {
+        health--;
 
-                case 0:
-                    Destroy(this.gameObject);
-                    break;
-            }
+        switch (health)
+        {
+            case 2:
+                mesh.material = medium;
+                break;
+
+            case 1:
+                mesh.material = low;
+                break;
+
+            case 0:
+                Destroy(this.gameObject);
+                break;
         }
     }
 }

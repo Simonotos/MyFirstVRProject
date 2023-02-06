@@ -698,7 +698,7 @@ MonoBehaviour:
   inAttackRange: 0
   isCoolingDown: 0
   isAttacking: 0
-  canDetectCollision: 0
+  playerHead: {fileID: 0}
 --- !u!82 &9133964414264578885
 AudioSource:
   m_ObjectHideFlags: 0

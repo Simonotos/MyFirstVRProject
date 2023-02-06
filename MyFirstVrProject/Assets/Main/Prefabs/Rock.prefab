@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 238687014}
   - component: {fileID: 238687017}
   - component: {fileID: 238687016}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 539873141}
   - component: {fileID: 539873143}
   - component: {fileID: 539873142}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: ObjectDescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 633383818}
   - component: {fileID: 633383820}
   - component: {fileID: 633383819}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2698,6 +2698,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSO: {fileID: 11400000, guid: 81be2ff214084bb42b30073877a6ffe8, type: 2}
   descriptionText: {fileID: 539873142}
-  logText: {fileID: 0}
   canvasObj: {fileID: 238687013}
   playerHead: {fileID: 0}

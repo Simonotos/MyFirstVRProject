@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class HideShowObjects : MonoBehaviour
 {
-    private bool canShowObjects;
     [SerializeField]
-    private bool island1, island2;
+    private bool canShowObjects1 = false, canShowObjects2 = false, saveShowObjects = false;
 
     //Island1
     [SerializeField]
     private Canvas leftHandHUID, rightHandHUID;
+    [SerializeField]
+    private Pull rightHandPull, leftHandPull;
     [SerializeField]
     private PlayerRigidbodyClimbing playerRgbClimbing;
     [SerializeField]
@@ -19,41 +20,48 @@ public class HideShowObjects : MonoBehaviour
 
     //Island2
     [SerializeField]
-    private GameObject gunSocket;
+    private GameObject gunModel, gunSocket;
     [SerializeField]
-    private GameObject gun;
+    private XRGrabInteractableTwoAttach gunInteractableScript;
     //
 
-    private void showObjects()
+    private void Update()
     {
-        if (island1) { 
-            leftHandHUID.enabled = canShowObjects; rightHandHUID.enabled = canShowObjects;
-            playerRgbClimbing.enabled = canShowObjects;
-            playerAudioSource.enabled = canShowObjects;
-        }
-
-        if (island2)
+        if (canShowObjects1 != saveShowObjects || canShowObjects2 != saveShowObjects || (canShowObjects1 == canShowObjects2 && saveShowObjects))
         {
-            gunSocket.SetActive(canShowObjects);
-            gun.SetActive(canShowObjects);
+            if(canShowObjects1 != canShowObjects2)
+                saveShowObjects = true;
+
+            //island1
+            leftHandHUID.enabled = canShowObjects1; rightHandHUID.enabled = canShowObjects1;
+            playerRgbClimbing.enabled = canShowObjects1;
+            playerAudioSource.enabled = canShowObjects1;
+            rightHandPull.enabled = canShowObjects1; leftHandPull.enabled = canShowObjects1;
+
+            //island2
+            gunModel.SetActive(canShowObjects2);
+            gunSocket.SetActive(canShowObjects2);
+            gunInteractableScript.enabled = canShowObjects2;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Island1"))
         {
-            canShowObjects = true;
-            showObjects();
+            saveShowObjects = canShowObjects1;
+            canShowObjects1 = true;
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Island2"))
         {
-            canShowObjects = false;
-            showObjects();
+            saveShowObjects = canShowObjects2;
+            canShowObjects2 = true;
+        }
+
+        if (other.CompareTag("IslandHub"))
+        {
+            canShowObjects1 = false; canShowObjects2 = false;
         }
     }
 }

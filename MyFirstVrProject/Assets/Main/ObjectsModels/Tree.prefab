@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 234555797206719461}
   - component: {fileID: 234555797206719462}
   - component: {fileID: 234555797206719463}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 234555797810174499}
   - component: {fileID: 234555797810174501}
   - component: {fileID: 234555797810174498}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 234555798295773024}
   - component: {fileID: 234555798295773026}
   - component: {fileID: 234555798295773027}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 3703134997739261829}
   m_Layer: 7
   m_Name: Tree
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

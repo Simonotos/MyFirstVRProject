@@ -14,6 +14,11 @@ TagManager:
   - Knob
   - ClimbWallZone
   - RecoverKnob
+  - Tree
+  - Rock
+  - Island1
+  - Island2
+  - IslandHub
   layers:
   - Default
   - TransparentFX

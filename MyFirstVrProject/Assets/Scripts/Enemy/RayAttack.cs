@@ -25,8 +25,12 @@ public class RayAttack : MonoBehaviour
     private Ray ray;
     private float distance, despawningTime, cooldownTime;
     private int pos;
-    public bool isDespawningAttack, inAttackRange, isCoolingDown, isAttacking, canDetectCollision;
+    public bool isDespawningAttack, inAttackRange, isCoolingDown, isAttacking;
     private bool playOneShot;
+    private bool collided;
+
+    [SerializeField]
+    private Transform playerHead;
 
     private void Awake()
     { 
@@ -35,28 +39,26 @@ public class RayAttack : MonoBehaviour
         inAttackRange = false;
         isCoolingDown = false;
         isAttacking = false;
-        canDetectCollision = true;
         playOneShot = true;
+        collided = false;
     }
 
     private void Update()
     {
-        if (inAttackRange && !isDespawningAttack)
+        if (inAttackRange && !isDespawningAttack && !collided)
         {
-            calculateTargetRay();
+            if(!isAttacking)
+                calculateTargetRay();
 
-            if(!isCoolingDown)
+            if (!isCoolingDown)
+            {
                 increaseLaserLengthOvertime();
+                detectCollision();
+            }
         }
 
         if (isDespawningAttack)
         {
-            if (canDetectCollision)
-            {
-                canDetectCollision = false;
-                detectCollision();
-            }
-
             despawnAttack();
         }
 
@@ -64,7 +66,6 @@ public class RayAttack : MonoBehaviour
         {
             if (Time.time - cooldownTime > secondsToCooldown)
             {
-                canDetectCollision = true;
                 isCoolingDown = false;
             }
         }
@@ -72,7 +73,9 @@ public class RayAttack : MonoBehaviour
 
     private void calculateTargetRay()
     {
-        ray = new Ray(transform.position, transform.up);
+        Vector3 direction = playerHead.position - transform.position;
+        direction.y -= 0.2f;
+        ray = new Ray(transform.position, direction);
         rayDraw.startWidth = .1f; rayDraw.endWidth = .1f;
     }
 
@@ -118,6 +121,7 @@ public class RayAttack : MonoBehaviour
         rayDraw.positionCount = 0;
         pos = -1;
         distance = 0;
+        collided = false;
     }
 
     private void resetVariables()
@@ -127,18 +131,34 @@ public class RayAttack : MonoBehaviour
         inAttackRange = false;
         isCoolingDown = false;
         isAttacking = false;
-        canDetectCollision = true;
         playOneShot = true;
+        collided = false;
     }
 
     private void detectCollision()
     {
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, maxDistance, targettableLayers))
+        if (Physics.Raycast(ray, out hit, distance, targettableLayers))
         {
-            Debug.Log("Eccomi");
-            hit.collider.gameObject.GetComponent<LifeManager>().onCollisionDetect();
+
+            if (hit.collider.gameObject.CompareTag("Tree"))
+            {
+                hit.collider.gameObject.GetComponent<LifeManager>().onCollisionDetect();
+                onCollision();
+            }
+            else if (hit.collider.gameObject.CompareTag("Rock"))
+            {
+                hit.collider.gameObject.GetComponent<DestroyUnitCover>().onCollisionDetect();
+                onCollision();
+            }
         }
+    }
+
+    private void onCollision()
+    {
+        collided = true;
+        isDespawningAttack = true;
+        despawningTime = Time.time;
     }
 
     public void setAttack(bool inAttackRange)
