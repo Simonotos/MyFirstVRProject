@@ -903,6 +903,15 @@
                     "processors": "",
                     "interactions": "Hold(duration=1.25)",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "AnalogicY",
+                    "type": "Value",
+                    "id": "87badf9c-c436-49b1-aee0-7be2236023f6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -1112,6 +1121,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "HoldTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05db8bc8-414d-4518-b806-d7b76a781222",
+                    "path": "<OculusTouchController>{RightHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnalogicY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

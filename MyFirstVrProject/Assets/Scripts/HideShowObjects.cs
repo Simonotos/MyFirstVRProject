@@ -3,7 +3,7 @@ using UnityEngine;
 public class HideShowObjects : MonoBehaviour
 {
     [SerializeField]
-    private bool canShowObjects1 = false, canShowObjects2 = false, saveShowObjects = false;
+    private bool canShowObjects1 = false, canShowObjects2 = false, canShowObjects3 = false, saveShowObjects = false;
 
     //Island1
     [SerializeField]
@@ -24,6 +24,10 @@ public class HideShowObjects : MonoBehaviour
     [SerializeField]
     private XRGrabInteractableTwoAttach gunInteractableScript;
     //
+
+    //Island3
+    [SerializeField]
+    private GameObject inventoryBag;
 
     private void Update()
     {
@@ -59,9 +63,15 @@ public class HideShowObjects : MonoBehaviour
             canShowObjects2 = true;
         }
 
+        if (other.CompareTag("Island3"))
+        {
+            inventoryBag.SetActive(false);
+        }
+
         if (other.CompareTag("IslandHub"))
         {
             canShowObjects1 = false; canShowObjects2 = false;
+            inventoryBag.SetActive(true);
         }
     }
 }
