@@ -1,4 +1,4 @@
-# MyVRUnityCourse
+# Short Description of the Project
 University project to learn the basics of VR game development.
 
 Features implemented in the game:
